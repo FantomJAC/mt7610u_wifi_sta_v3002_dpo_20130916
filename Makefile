@@ -32,7 +32,7 @@ include $(RT28xx_DIR)/os/linux/config.mk
 RTMP_SRC_DIR = $(RT28xx_DIR)/RT$(MODULE)
 
 #PLATFORM: Target platform
-PLATFORM = PC
+PLATFORM = RPI
 #PLATFORM = 5VT
 #PLATFORM = IKANOS_V160
 #PLATFORM = IKANOS_V180
@@ -201,6 +201,12 @@ LINUX_SRC = /lib/modules/$(shell uname -r)/build
 #LINUX_SRC = /usr/src/linux-2.4
 LINUX_SRC_MODULE = /lib/modules/$(shell uname -r)/kernel/drivers/net/wireless/
 CROSS_COMPILE = 
+endif
+
+ifeq ($(PLATFORM),RPI)
+LINUX_SRC = $(PI_SRC)
+CROSS_COMPILE = arm-linux-gnueabihf-
+export ARCH = arm
 endif
 
 ifeq ($(PLATFORM),INTELP6)
